@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from PersonIdCheckService WSDL service -->
+
+  <service name="PersonIdCheck" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://webservices.dobi.org"/>
+      <parameter name="wsdlServiceElement" value="PersonIdCheckService"/>
+      <parameter name="schemaQualified" value="http://webservices.dobi.org"/>
+      <parameter name="wsdlServicePort" value="PersonIdCheck"/>
+      <parameter name="className" value="org.dobi.webservices.PersonIdCheck"/>
+      <parameter name="wsdlPortType" value="PersonIdCheck"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://webservices.dobi.org" xmlns:retNS="http://webservices.dobi.org" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="checkId" qname="operNS:checkId" returnQName="retNS:checkIdReturn" returnType="rtns:string" soapAction="">
+        <parameter xmlns:pns="http://webservices.dobi.org" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:personId" type="tns:string"/>
+      </operation>
+      <parameter name="allowedMethods" value="checkId"/>
+	  <beanMapping qname="myNS:PersonIdCheckResponse" xmlns:myNS="urn:myWS" languageSpecificType="java:org.dobi.webservices.PersonIdCheckResponse"/>
+  </service>
+</deployment>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="http://webservices.dobi.org" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="http://webservices.dobi.org" xmlns:intf="http://webservices.dobi.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema elementFormDefault="qualified" targetNamespace="http://webservices.dobi.org" xmlns="http://www.w3.org/2001/XMLSchema">
+   <element name="checkId">
+    <complexType>
+     <sequence>
+      <element name="personId" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+   <element name="checkIdResponse">
+    <complexType>
+     <sequence>
+      <element name="checkIdReturn" type="xsd:string"/>
+     </sequence>
+    </complexType>
+   </element>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="checkIdRequest">
+
+      <wsdl:part element="impl:checkId" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:message name="checkIdResponse">
+
+      <wsdl:part element="impl:checkIdResponse" name="parameters">
+
+      </wsdl:part>
+
+   </wsdl:message>
+
+   <wsdl:portType name="PersonIdCheck">
+
+      <wsdl:operation name="checkId">
+
+         <wsdl:input message="impl:checkIdRequest" name="checkIdRequest">
+
+       </wsdl:input>
+
+         <wsdl:output message="impl:checkIdResponse" name="checkIdResponse">
+
+       </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="PersonIdCheckSoapBinding" type="impl:PersonIdCheck">
+
+      <wsdlsoap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="checkId">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="checkIdRequest">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="checkIdResponse">
+
+            <wsdlsoap:body use="literal"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="PersonIdCheckService">
+
+      <wsdl:port binding="impl:PersonIdCheckSoapBinding" name="PersonIdCheck">
+
+         <wsdlsoap:address location="http://localhost:8080/PersonIdSoap/services/PersonIdCheck"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>
