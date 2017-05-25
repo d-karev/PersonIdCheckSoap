@@ -81,7 +81,7 @@ Built on Apr 22, 2006 (06:55:48 PDT)-->
 
       <wsdl:port binding="impl:PersonIdCheckSoapBinding" name="PersonIdCheck">
 
-         <wsdlsoap:address location="http://localhost:8080/PersonIdSoap/services/PersonIdCheck"/>
+         <wsdlsoap:address location="http://localhost:8080/PersonIdCheckSoap/services/PersonIdCheck"/>
 
       </wsdl:port>
 
