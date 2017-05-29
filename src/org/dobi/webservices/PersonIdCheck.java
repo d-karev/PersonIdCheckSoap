@@ -1,15 +1,18 @@
 package org.dobi.webservices;
 
-import java.io.StringWriter;
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.soap.MessageFactory;
+import javax.xml.soap.SOAPMessage;
 
 import org.dobi.utils.PersonIdLogic;
+import org.w3c.dom.Document;
 
 @WebService
 public class PersonIdCheck {
@@ -34,13 +37,19 @@ public class PersonIdCheck {
 			JAXBContext jaxbContext = JAXBContext.newInstance(PersonIdCheckResponse.class);
 			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
 			
-			StringWriter sw = new StringWriter();
-			jaxbMarshaller.marshal(result, sw);
+			Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+			jaxbMarshaller.marshal(result, document);
 			
-			xmlResult = sw.toString();
+			SOAPMessage soapMessage = MessageFactory.newInstance().createMessage();
+			soapMessage.getSOAPBody().addDocument(document);
+			
+			ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+			soapMessage.writeTo(outputStream);
+			
+			xmlResult = new String(outputStream.toByteArray());
 		}
-		catch (JAXBException e) {
-			e.printStackTrace();
+		catch (Exception e) {
+			xmlResult = "Service failed! Please, try again later...";
 		}
 		
 		return xmlResult;		
